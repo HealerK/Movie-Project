@@ -16,7 +16,7 @@ export async function fetchMovie(id: number) {
 }
 
 interface MoviePageProps {
-  params: { id: string } | Promise<{ id: string }>;
+  params: { id: number } | Promise<{ id: number }>;
 }
 
 const Movie = async ({ params }: MoviePageProps) => {

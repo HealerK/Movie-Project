@@ -1,14 +1,11 @@
 import React from "react";
 import PersonDetail from "@/components/PersonDetail";
 
-interface PersonDetailProps {
-  params: { id: number };
-}
-
-const page = ({ params }: PersonDetailProps) => {
+const page = async ({ params }: { params: Promise<{ id: number }> }) => {
+  const id = (await params).id;
   return (
     <>
-      <PersonDetail params={params} />
+      <PersonDetail params={{ id }} />
     </>
   );
 };

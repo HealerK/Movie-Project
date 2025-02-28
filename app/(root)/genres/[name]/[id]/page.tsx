@@ -19,7 +19,6 @@ async function fetchMovies(id: number) {
 const Home = async ({ params }: { params: Promise<{ id: number }> }) => {
   const genresId = (await params).id;
   const movies = await fetchMovies(genresId);
-  console.log(movies.results);
   return (
     <>
       <h3 className="font-bold border-b mb-4 pb-2">{movies.name}</h3>

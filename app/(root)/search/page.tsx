@@ -3,12 +3,6 @@ import axios from "axios";
 
 const token = process.env.TMDB_TOKEN;
 
-interface SearchProps {
-  searchParams: {
-    q?: string;
-  };
-}
-
 async function fetchSearch(query: string) {
   try {
     const res = await axios.get(`https://api.themoviedb.org/3/search/movie`, {
@@ -26,9 +20,16 @@ async function fetchSearch(query: string) {
   }
 }
 
-const Search = async ({ searchParams }: SearchProps) => {
+const Search = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ q: string }>;
+}) => {
+  // Await the searchParams Promise to get the resolved query
+  const { q } = await searchParams;
+
   // Handle empty search query
-  if (!searchParams.q) {
+  if (!q) {
     return (
       <div className="p-4">
         <h3 className="font-bold border-b mb-4 pb-2">Search</h3>
@@ -37,12 +38,12 @@ const Search = async ({ searchParams }: SearchProps) => {
     );
   }
 
-  const searchData = await fetchSearch(searchParams.q);
+  const searchData = await fetchSearch(q);
 
   return (
     <div className="p-4">
-      <h3 className="font-bold border-b mb-4 pb-2">
-        Search results for: {searchParams.q}
+      <h3 className="font-bold border-b mb-4 pb-2 text-2xl">
+        Search results for: {q}
       </h3>
 
       {searchData.results?.length > 0 ? (
