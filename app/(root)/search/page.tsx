@@ -1,4 +1,4 @@
-import Movies from "@/components/Movies"; // Ensure this is the correct component
+import Movies from "@/components/Movies";
 import axios from "axios";
 
 const token = process.env.TMDB_TOKEN;
